@@ -95,5 +95,9 @@ public class SolicitReviewLibrary {
       Logger.log("appVersionForStorage is up to date ✅")
     }
   }
+  
+  public static func getReviewURL(appStoreId: String) -> URL? {
+    URL(string: "https://apps.apple.com/in/app/app-name/\(appStoreId)?action=write-review")
+  }
 }
 
