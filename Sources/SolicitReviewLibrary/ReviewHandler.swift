@@ -10,7 +10,7 @@ struct SettingKeys {
   static let lastVersionPromptedForReviewKey = "LastVersionPromptedForReview"
 }
 
-class SolicitReviewLibrary {
+class ReviewHandler {
   private var checkpointCount: Int
   
   public init(checkpointCount: Int) {
