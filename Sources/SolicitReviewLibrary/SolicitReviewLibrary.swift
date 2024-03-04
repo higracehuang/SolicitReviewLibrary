@@ -36,7 +36,7 @@ public class SolicitReviewLibrary {
     return count == checkpointCount && currentVersion != lastVersionPromptedForReview
   }
   
-  func requestReview() {
+  public func requestReview() {
     if shouldPrompt() {
       Logger.log("Asking for review")
       askForReview(withHandler: showNativeReviewPrompt)
