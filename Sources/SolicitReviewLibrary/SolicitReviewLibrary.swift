@@ -8,6 +8,7 @@ import StoreKit
 struct SettingKeys {
   static let engagementCounterKey = "EngagementCounter"
   static let lastVersionPromptedForReviewKey = "LastVersionPromptedForReview"
+  static let appVersionForStorageKey = "appVersionForStorageKey"
 }
 
 public class SolicitReviewLibrary {
@@ -72,6 +73,26 @@ public class SolicitReviewLibrary {
         SKStoreReviewController.requestReview(in: scene)
         UserDefaults.standard.set(Bundle.main.releaseVersionNumber, forKey: SettingKeys.lastVersionPromptedForReviewKey)
       }
+    }
+  }
+  
+  public static func appInit() {
+    let storedVersion = UserDefaults.standard.string(forKey: SettingKeys.appVersionForStorageKey) ?? ""
+    
+    let currentVersion = Bundle.main.releaseVersionNumber
+    
+    if storedVersion != currentVersion {
+      // Perform actions to refresh fields or update as needed
+      
+      // Set the engagement counter to 0
+      Logger.log("Reset engagementCounter to 0")
+      UserDefaults.standard.set(0, forKey: SettingKeys.engagementCounterKey)
+      
+      // Finally, update stored version
+      Logger.log("Reset appVersionForStorage to \(currentVersion)")
+      UserDefaults.standard.set(currentVersion, forKey: SettingKeys.appVersionForStorageKey)
+    } else {
+      Logger.log("appVersionForStorage is up to date ✅")
     }
   }
 }
