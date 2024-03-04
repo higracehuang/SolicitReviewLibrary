@@ -45,11 +45,11 @@ public class SolicitReviewLibrary {
   
   private func askForReview(withHandler handler: @escaping () -> Void) {
     let enjoyAppAlert = UIAlertController(
-      title: NSLocalizedString("Do you enjoy ReadingClock?", comment: ""),
-      message: NSLocalizedString("If you enjoy using ReadingClock, we'd appreciate your feedback!", comment: ""),
+      title: NSLocalizedString("Do you enjoy \(Bundle.main.appName)?", comment: ""),
+      message: NSLocalizedString("If you enjoy using \(Bundle.main.appName), we'd appreciate your feedback!", comment: ""),
       preferredStyle: .alert)
     
-    let yesAction = UIAlertAction(title: NSLocalizedString("Yes. Rate ReadingClock now", comment: ""), style: .default) { _ in
+    let yesAction = UIAlertAction(title: NSLocalizedString("Yes. Rate \(Bundle.main.appName) now", comment: ""), style: .default) { _ in
       // If the user enjoys the app, call the provided handler
       handler()
     }
