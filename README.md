@@ -8,7 +8,7 @@ Currently, it is only enabled for iOS >= 14.
 
 # Usage
 
-1. Add `SolicitReviewLibrary` to the Package Dependencies of your iOS app project.
+1. Add `SolicitReviewLibrary` (https://github.com/higracehuang/SolicitReviewLibrary.git) to the Package Dependencies of your iOS app project.
 
 2. Import `SolicitReviewLibrary`, and call `SolicitReviewLibrary.appInit()` in the App module.
 
