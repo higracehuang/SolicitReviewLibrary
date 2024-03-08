@@ -23,7 +23,7 @@ import SolicitReviewLibrary
 @main
 struct ExampleApp: App {
   init() {
-    SolicitReviewLibrary.appInit()
+    SolicitReviewLibrary.appInit() // 0) Init for the app
   }
   var body: some Scene {
     WindowGroup {
@@ -44,7 +44,7 @@ import SolicitReviewLibrary
 struct ContentView: View {
   @State private var buttonTapped = false
   
-  let solicitReviewLibrary = SolicitReviewLibrary(checkpointCount: 10)
+  let solicitReviewLibrary = SolicitReviewLibrary(checkpointCount: 10) // 1) Init
   
   var body: some View {
     VStack {
@@ -53,7 +53,7 @@ struct ContentView: View {
       
       Button(action: {
         self.buttonTapped.toggle()
-        solicitReviewLibrary.requestReview()
+        solicitReviewLibrary.requestReview() // 2) Prompt for review
       }) {
         Text("Tap Me!")
           .padding()
