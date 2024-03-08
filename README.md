@@ -70,6 +70,23 @@ struct ContentView: View {
 
 ## Link to Review on App Store
 
+Replace `idxxxxxxxxxxxx` with your app ID.
+
+```
+import SwiftUI
+import SolicitReviewLibrary
+
+struct ContentView: View {
+    var body: some View {
+        if let reviewURL = SolicitReviewLibrary.getReviewURL(appStoreId: "idxxxxxxxxxxxx") {
+            Link(destination: reviewURL) {
+                Text("Rate This App 🙏")
+            }
+        }
+    }
+}
+```
+
 # Debug
 
 In the Xcode console, look for debug lines with the tag `[SolicitReviewLibrary]` when testing.
