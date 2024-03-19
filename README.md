@@ -87,6 +87,8 @@ struct ContentView: View {
 }
 ```
 
+It will direct to `https://apps.apple.com/in/app/app-name/idxxxxxxxxxxxx?action=write-review`
+
 # Debug
 
 In the Xcode console, look for debug lines with the tag `[SolicitReviewLibrary]` when testing.
