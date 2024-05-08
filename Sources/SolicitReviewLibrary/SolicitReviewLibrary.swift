@@ -4,6 +4,11 @@
 import Foundation
 import StoreKit
 
+#if os(iOS)
+import UIKit
+#endif
+
+
 struct SettingKeys {
   static let engagementCounterKey = "EngagementCounter"
   static let lastVersionPromptedForReviewKey = "LastVersionPromptedForReview"
@@ -11,8 +16,9 @@ struct SettingKeys {
 }
 
 public class SolicitReviewLibrary {
+#if os(iOS)
   private var checkpointCount: Int
-  
+
   public init(checkpointCount: Int) {
     self.checkpointCount = checkpointCount
   }
@@ -36,6 +42,7 @@ public class SolicitReviewLibrary {
     return count == checkpointCount && currentVersion != lastVersionPromptedForReview
   }
   
+
   public func requestReview() {
     if shouldPrompt() {
       Logger.log("Asking for review")
@@ -94,6 +101,8 @@ public class SolicitReviewLibrary {
       Logger.log("appVersionForStorage is up to date ✅")
     }
   }
+  
+#endif
   
   public static func getReviewURL(appStoreId: String) -> URL? {
     URL(string: "https://apps.apple.com/in/app/app-name/\(appStoreId)?action=write-review")
