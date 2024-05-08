@@ -10,7 +10,7 @@ Currently, it is only enabled for iOS >= 14, and macOS >= 13
 
 ## Review Prompt
 
-1. Add `SolicitReviewLibrary` (https://github.com/higracehuang/SolicitReviewLibrary.git) to the Package Dependencies of your iOS app project.
+1. Add `SolicitReviewLibrary` (https://github.com/higracehuang/SolicitReviewLibrary.git) to the Package Dependencies of your iOS or macOS app project.
 
 2. Import `SolicitReviewLibrary`, and call `SolicitReviewLibrary.appInit()` in the App module.
 
