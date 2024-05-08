@@ -16,7 +16,7 @@ struct SettingKeys {
 }
 
 public class SolicitReviewLibrary {
-#if os(iOS)
+
   private var checkpointCount: Int
 
   public init(checkpointCount: Int) {
@@ -46,9 +46,15 @@ public class SolicitReviewLibrary {
   public func requestReview() {
     if shouldPrompt() {
       Logger.log("Asking for review")
+#if os(iOS)
       askForReview(withHandler: showNativeReviewPrompt)
+#elseif os(macOS)
+      showNativeReviewPrompt()
+#endif
     }
   }
+
+#if os(iOS)
   
   private func askForReview(withHandler handler: @escaping () -> Void) {
     let enjoyAppAlert = UIAlertController(
@@ -82,6 +88,15 @@ public class SolicitReviewLibrary {
     }
   }
   
+#elseif os(macOS)
+  private func showNativeReviewPrompt() {
+    DispatchQueue.main.async {
+      SKStoreReviewController.requestReview()
+      UserDefaults.standard.set(Bundle.main.releaseVersionNumber, forKey: SettingKeys.lastVersionPromptedForReviewKey)
+    }
+  }
+#endif
+  
   public static func appInit() {
     let storedVersion = UserDefaults.standard.string(forKey: SettingKeys.appVersionForStorageKey) ?? ""
     
@@ -101,8 +116,6 @@ public class SolicitReviewLibrary {
       Logger.log("appVersionForStorage is up to date ✅")
     }
   }
-  
-#endif
   
   public static func getReviewURL(appStoreId: String) -> URL? {
     URL(string: "https://apps.apple.com/in/app/app-name/\(appStoreId)?action=write-review")
