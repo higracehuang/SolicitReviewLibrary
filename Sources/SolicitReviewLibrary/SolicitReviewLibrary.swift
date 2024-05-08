@@ -46,11 +46,7 @@ public class SolicitReviewLibrary {
   public func requestReview() {
     if shouldPrompt() {
       Logger.log("Asking for review")
-#if os(iOS)
       askForReview(withHandler: showNativeReviewPrompt)
-#elseif os(macOS)
-      showNativeReviewPrompt()
-#endif
     }
   }
 
@@ -89,6 +85,19 @@ public class SolicitReviewLibrary {
   }
   
 #elseif os(macOS)
+  private func askForReview(withHandler handler: @escaping () -> Void) {
+    let alert = NSAlert()
+    alert.messageText = NSLocalizedString("Do you enjoy \(Bundle.main.appName)?", comment: "")
+    alert.informativeText = NSLocalizedString("If you enjoy using \(Bundle.main.appName), we'd appreciate your feedback!", comment: "")
+    alert.addButton(withTitle: NSLocalizedString("Yes. Rate \(Bundle.main.appName) now", comment: ""))
+    alert.addButton(withTitle: NSLocalizedString("No. Thanks", comment: ""))
+    
+    let modalResult = alert.runModal()
+    if modalResult == .alertFirstButtonReturn {
+      handler()
+    }
+  }
+  
   private func showNativeReviewPrompt() {
     DispatchQueue.main.async {
       SKStoreReviewController.requestReview()
