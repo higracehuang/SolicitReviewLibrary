@@ -4,7 +4,7 @@ SolicitReviewLibrary is a Swift package that manages the simple flow of the revi
 
 For any new version of your app, it will prompt the user to rate the app whenever it reaches the action threshold.
 
-Currently, it is only enabled for iOS >= 14, and macOS >= 13
+Currently, it is only enabled for iOS >= 14, and macOS >= 11
 
 # Usage
 
