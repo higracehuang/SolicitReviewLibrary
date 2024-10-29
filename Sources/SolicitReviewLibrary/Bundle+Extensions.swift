@@ -9,6 +9,9 @@ extension Bundle {
   }
   
   var appName: String {
+    if let localizedAppName = localizedInfoDictionary?["CFBundleDisplayName"] as? String {
+      return localizedAppName
+    }
     guard let appName = infoDictionary?["CFBundleDisplayName"] as? String else {
       fatalError("App name not found in Info.plist.")
     }
