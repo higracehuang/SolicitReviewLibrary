@@ -17,6 +17,11 @@ struct SettingKeys {
 
 public class SolicitReviewLibrary {
 
+  let promptTitle = NSLocalizedString("Are you enjoying \(Bundle.main.appName)?", comment: "")
+  let promptMessage = NSLocalizedString("Please let us know what you think!", comment: "")
+  let yesButtonTitle = NSLocalizedString("Love it! 🥰", comment: "")
+  let noButtonTitle = NSLocalizedString("Not really", comment: "")
+
   private var checkpointCount: Int
 
   public init(checkpointCount: Int) {
@@ -54,20 +59,18 @@ public class SolicitReviewLibrary {
   
   private func askForReview(withHandler handler: @escaping () -> Void) {
     let enjoyAppAlert = UIAlertController(
-      title: NSLocalizedString("Do you enjoy \(Bundle.main.appName)?", comment: ""),
-      message: NSLocalizedString("If you enjoy using \(Bundle.main.appName), we'd appreciate your feedback!", comment: ""),
+      title: promptTitle,
+      message: promptMessage,
       preferredStyle: .alert)
     
-    let yesAction = UIAlertAction(title: NSLocalizedString("Yes. Rate \(Bundle.main.appName) now", comment: ""), style: .default) { _ in
+    let noAction = UIAlertAction(title: noButtonTitle, style: .default, handler: nil)
+    let yesAction = UIAlertAction(title: yesButtonTitle, style: .default) { _ in
       // If the user enjoys the app, call the provided handler
       handler()
     }
     
-    let noAction = UIAlertAction(title: NSLocalizedString("No. Thanks", comment: ""), style: .default, handler: nil)
-    
     enjoyAppAlert.addAction(noAction)
     enjoyAppAlert.addAction(yesAction)
-    
     
     if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
        let rootViewController = windowScene.windows.first?.rootViewController {
@@ -87,13 +90,13 @@ public class SolicitReviewLibrary {
 #elseif os(macOS)
   private func askForReview(withHandler handler: @escaping () -> Void) {
     let alert = NSAlert()
-    alert.messageText = NSLocalizedString("Do you enjoy \(Bundle.main.appName)?", comment: "")
-    alert.informativeText = NSLocalizedString("If you enjoy using \(Bundle.main.appName), we'd appreciate your feedback!", comment: "")
-    alert.addButton(withTitle: NSLocalizedString("Yes. Rate \(Bundle.main.appName) now", comment: ""))
-    alert.addButton(withTitle: NSLocalizedString("No. Thanks", comment: ""))
+    alert.messageText = promptTitle
+    alert.informativeText = promptMessage
+    alert.addButton(withTitle: noButtonTitle)
+    alert.addButton(withTitle: yesButtonTitle)
     
     let modalResult = alert.runModal()
-    if modalResult == .alertFirstButtonReturn {
+    if modalResult == .alertSecondButtonReturn {
       handler()
     }
   }
