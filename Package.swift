@@ -5,6 +5,7 @@ import PackageDescription
 
 let package = Package(
     name: "SolicitReviewLibrary",
+    defaultLocalization: "en",
     platforms: [
       .iOS(.v14),
       .macOS(.v11)
@@ -21,7 +22,10 @@ let package = Package(
         .target(
             name: "SolicitReviewLibrary",
             dependencies: [],
-            path: "Sources"),
+            path: "Sources/SolicitReviewLibrary",
+            resources: [
+                .process("Resources")
+            ]),
         .testTarget(
             name: "SolicitReviewLibraryTests",
             dependencies: ["SolicitReviewLibrary"]),
