@@ -92,10 +92,11 @@ public class SolicitReviewLibrary {
         let alert = NSAlert()
         alert.messageText = PromptStrings.title
         alert.informativeText = PromptStrings.message
-        alert.addButton(withTitle: PromptStrings.noButton)
         alert.addButton(withTitle: PromptStrings.yesButton)
+        alert.addButton(withTitle: PromptStrings.noButton)
+        alert.buttons.first?.keyEquivalent = "\r"
         
-        if alert.runModal() == .alertSecondButtonReturn {
+        if alert.runModal() == .alertFirstButtonReturn {
             handler()
         }
     }
