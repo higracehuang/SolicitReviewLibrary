@@ -40,12 +40,7 @@ public class SolicitReviewLibrary {
     
     private func shouldPrompt() -> Bool {
         let count = recordEngagement()
-        let currentVersion = Bundle.main.releaseVersionNumber
-        let lastVersionPrompted = UserDefaults.standard.string(forKey: SettingKeys.lastVersionPromptedForReviewKey) ?? ""
-        
-        Logger.log("count:\(count) currentVersion:\(currentVersion) lastVersionPrompted:\(lastVersionPrompted)")
-        
-        return count == checkpointCount && currentVersion != lastVersionPrompted
+        return count == checkpointCount && !hasPromptYet()
     }
     
     public func requestReview() {
@@ -126,5 +121,12 @@ public class SolicitReviewLibrary {
     
     public static func getReviewURL(appStoreId: String) -> URL? {
         URL(string: "https://apps.apple.com/in/app/app-name/\(appStoreId)?action=write-review")
+    }
+
+    public func hasPromptYet() -> Bool {
+        let lastVersionPrompted = UserDefaults.standard.string(forKey: SettingKeys.lastVersionPromptedForReviewKey) ?? ""
+        let currentVersion = Bundle.main.releaseVersionNumber
+        Logger.log("count:\(count) currentVersion:\(currentVersion) lastVersionPrompted:\(lastVersionPrompted)")
+        return lastVersionPrompted == currentVersion
     }
 }
