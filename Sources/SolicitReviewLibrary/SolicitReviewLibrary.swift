@@ -40,6 +40,7 @@ public class SolicitReviewLibrary {
     
     private func shouldPrompt() -> Bool {
         let count = recordEngagement()
+        Logger.log("count: \(count)")
         return count == checkpointCount && !hasPromptYet()
     }
     
@@ -126,7 +127,7 @@ public class SolicitReviewLibrary {
     public func hasPromptYet() -> Bool {
         let lastVersionPrompted = UserDefaults.standard.string(forKey: SettingKeys.lastVersionPromptedForReviewKey) ?? ""
         let currentVersion = Bundle.main.releaseVersionNumber
-        Logger.log("count:\(count) currentVersion:\(currentVersion) lastVersionPrompted:\(lastVersionPrompted)")
+        Logger.log("currentVersion:\(currentVersion) lastVersionPrompted:\(lastVersionPrompted)")
         return lastVersionPrompted == currentVersion
     }
 }
