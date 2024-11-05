@@ -70,6 +70,8 @@ public class SolicitReviewLibrary {
         if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
            let rootViewController = windowScene.windows.first?.rootViewController {
             rootViewController.present(alert, animated: true, completion: nil)
+        } else {
+            Logger.log("No root view controller found")
         }
     }
     
