@@ -126,10 +126,25 @@ public class SolicitReviewLibrary {
         URL(string: "https://apps.apple.com/in/app/app-name/\(appStoreId)?action=write-review")
     }
 
+    public static func getShareURL(appStoreId: String) -> URL? {
+        URL(string: "https://apps.apple.com/app/\(appStoreId)")
+    }
+
     public func hasPromptYet() -> Bool {
         let lastVersionPrompted = UserDefaults.standard.string(forKey: SettingKeys.lastVersionPromptedForReviewKey) ?? ""
         let currentVersion = Bundle.main.releaseVersionNumber
         Logger.log("currentVersion:\(currentVersion) lastVersionPrompted:\(lastVersionPrompted)")
         return lastVersionPrompted == currentVersion
+    }
+
+    public static func actionShareApp(appStoreId: String) {
+      let appURL = getShareURL(appStoreId: appStoreId)!
+      let shareText = "Check out this amazing app: \(Bundle.main.appName)! Download it here: \(appURL)"
+      let activityVC = UIActivityViewController(activityItems: [shareText], applicationActivities: nil)
+      
+      if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+         let rootVC = windowScene.windows.first?.rootViewController {
+        rootVC.present(activityVC, animated: true, completion: nil)
+      }
     }
 }
