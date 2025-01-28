@@ -51,6 +51,10 @@ public class SolicitReviewLibrary {
         }
     }
 
+    public func debugResetEngagementCounter() {
+        UserDefaults.standard.set(0, forKey: SettingKeys.engagementCounterKey)
+    }
+
 #if os(iOS)
     
     private func askForReview(withHandler handler: @escaping () -> Void) {
