@@ -51,7 +51,7 @@ public class SolicitReviewLibrary {
         }
     }
 
-    public staticfunc debugResetEngagementCounter() {
+    public static func debugResetEngagementCounter() {
         UserDefaults.standard.set(0, forKey: SettingKeys.engagementCounterKey)
     }
 
