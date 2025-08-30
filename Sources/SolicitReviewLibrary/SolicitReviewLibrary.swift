@@ -51,6 +51,15 @@ public class SolicitReviewLibrary {
         }
     }
 
+    public func requestReviewIfNecessary() -> Bool {
+        if shouldPrompt() {
+            Logger.log("Asking for review")
+            askForReview(withHandler: showNativeReviewPrompt)
+            return true
+        }
+        return false
+    }
+
     public static func debugResetEngagementCounter() {
         UserDefaults.standard.set(0, forKey: SettingKeys.engagementCounterKey)
     }

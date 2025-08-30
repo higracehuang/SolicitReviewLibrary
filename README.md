@@ -60,6 +60,7 @@ struct ContentView: View {
       Button(action: {
         self.buttonTapped.toggle()
         solicitReviewLibrary.requestReview() // 2) Prompt for review
+        // let isPrompted = solicitReviewLibrary.requestReviewIfNecessary() // or use this to check if the review was prompted
       }) {
         Text("Tap Me!")
           .padding()
